@@ -2,7 +2,6 @@ let storedNumber = ""
 let operator = ""
 let currentNumber = ""
 
-
 //display values
 const display = document.getElementById('display')
 
@@ -11,7 +10,7 @@ function showValues() {
     console.log(`stored: ${storedNumber} operator: ${operator} current: ${currentNumber}`)
 }
 
-//clear all values andd display
+//clear all values and display
 const clearAll = document.getElementById('clear')
 clearAll.addEventListener("click", () => {
     storedNumber = ""
@@ -21,35 +20,38 @@ clearAll.addEventListener("click", () => {
 })
 
 //numbers pad and input
-const numPad = document.getElementById('calculator-num')
-numPad.addEventListener('click', (e) => numberPressed(e.target.id))
+const numPad = document.querySelectorAll('.num')
+numPad.forEach(number => number.addEventListener('click', () => numberPressed(number.id)))
 
-function numberPressed(eventTargetId) {
-    const clicked = eventTargetId
-    if (clicked === "calculator-num" || currentNumber.indexOf('.') !== -1 && clicked === ".") {
-        return;
-    }
+function numberPressed(clicked) {
     if (operator === "" && storedNumber !== "") {
         storedNumber = ""
     }
-    display.textContent += clicked
-    currentNumber += clicked
+    if (currentNumber.indexOf('.') !== -1 && clicked === ".") {
+        //Checks for double decimals (no double decimal dipping!)
+        return;
+    } else if (clicked === "Back") {
+        currentNumber = currentNumber.substring(0, currentNumber.length - 1)
+    } else {
+        display.textContent += clicked
+        currentNumber += clicked
+    }
     showValues()
 }
 
 //operators pad and input
-const operatorPad = document.getElementById('operators')
-operatorPad.addEventListener("click", (e) => operatorPressed(e.target.id))
+const operatorPad = document.querySelectorAll('.op')
+operatorPad.forEach(op => op.addEventListener("click", () => operatorPressed(op.id)))
 
-function operatorPressed(eventTargetId) {
-    const clicked = eventTargetId
-    if (clicked === "operators" || currentNumber === "" && storedNumber === "") {
+function operatorPressed(clicked) {
+    if (currentNumber === "" && storedNumber === "") {
         return
-    }
-    if (currentNumber !== "" && storedNumber === "") {
+    } else if (currentNumber !== "" && storedNumber === "") {
         storedNumber = currentNumber
         currentNumber = ""
     }
+    calculateResult()
+
     operator = clicked
     showValues()
 }
@@ -89,15 +91,17 @@ function calculateNumber(num1, num2, operator) {
 }
 
 //keypress support
-document.addEventListener("keypress", (e) => {
+document.addEventListener("keydown", (e) => {
     e.preventDefault()
-    console.log(e)
-    if (e.code.indexOf('Digit') !== -1 || e.key === ".") {
-        numberPressed(e.key)
-    } else if (e.key === "+" || e.key === "-" || e.key === "/" || e.key === "*"
-    ) {
-        operatorPressed(e.key)
-    } else if (e.key === "=" || e.key === "Enter") {
+    const keyPressed = e.key
+
+    if (e.code !== "Space" && isFinite(keyPressed) || keyPressed === ".") {
+        numberPressed(keyPressed)
+    } else if (keyPressed === "Backspace") {
+        numberPressed("Back")
+    } else if (keyPressed === "+" || keyPressed === "-" || keyPressed === "/" || keyPressed === "*") {
+        operatorPressed(keyPressed)
+    } else if (keyPressed === "=" || keyPressed === "Enter") {
         calculateResult()
     }
 })
