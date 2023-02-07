@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
-    
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -27,7 +27,7 @@ body {
 #display {
     font-size: 2em;
 
-    color: #e75d37;
+    color: #ee7357;
     background-color: #F3F4ED;
     border-radius: 15px;
 
@@ -67,10 +67,17 @@ button {
     color: #ee7357;
     background-color: #eed9b4;
 
+    cursor: pointer;
+
     border-style: none;
     border-radius: 30px;
     height: 80px;
     width: 80px;
+}
+
+button:hover {
+    transition: all 0.1s ease-in-out;
+    filter: saturate(150%) brightness(95%);
 }
 
 .long {
