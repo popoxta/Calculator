@@ -73,10 +73,10 @@ button {
     border-radius: 30px;
     height: 80px;
     width: 80px;
+    transition: all 0.1s ease-in-out;
 }
 
 button:hover {
-    transition: all 0.1s ease-in-out;
     filter: saturate(150%) brightness(95%);
 }
 
