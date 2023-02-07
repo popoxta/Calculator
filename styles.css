@@ -1,74 +1,91 @@
-body{
+body {
     background-color: #d0d5e0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
     margin: 0;
     padding: 0;
     height: 100vh;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-#calculator{
+
+#calculator {
     background-color: #383E56;
     border-radius: 15px;
+
     height: 600px;
     width: 430px;
     padding: 20px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 30px;
 }
-#display{
+
+#display {
     font-size: 2em;
+
     color: #e75d37;
     background-color: #F3F4ED;
+    border-radius: 15px;
 
     height: 100px;
     width: 400px;
     padding: 0 15px;
-    border-radius: 15px;
     overflow: hidden;
 
     display: flex;
     justify-content: flex-end;
     align-items: center;
 }
+
 #calculator-pad {
     width: 400px;
     display: flex;
 }
-#clear-buttons{
+
+#clear-buttons {
     display: flex;
     gap: 20px;
 }
-#operators{
+
+#operators {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
-#numbers{
+
+#numbers {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
 }
+
 button {
     color: #ee7357;
     background-color: #eed9b4;
+
     border-style: none;
     border-radius: 30px;
     height: 80px;
     width: 80px;
 }
-.long{
+
+.long {
     height: 60px;
     width: 190px;
 }
-span{
+
+span {
     color: #F69E7B;
 }
-*{
-    font-family: "Roboto Light", sans-serif;
+
+* {
     color: #F69E7B;
+
+    font-family: "Roboto Light", sans-serif;
     font-weight: bold;
     font-size: 1.1em;
 }
