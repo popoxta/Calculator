@@ -105,3 +105,12 @@ document.addEventListener("keydown", (e) => {
         calculateResult()
     }
 })
+
+//theme switch
+function switchTheme(){
+    const root = document.documentElement
+    root.className = root.className === "light" ? "dark" : "light"
+}
+switchTheme()
+const themeButton = document.getElementById("theme-switch")
+themeButton.addEventListener("click", switchTheme)
